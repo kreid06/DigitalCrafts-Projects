@@ -1,0 +1,465 @@
+@media only screen  and (min-width : 1224px) {
+    :root {
+        --image-x: 0px;
+        --image-y: 0px;
+    }
+    
+    html {
+        overflow-x: hidden;
+    }
+    .free-images{
+        position: absolute;
+    }
+    .side-bar-1 {
+        /* display:none; */
+        position: absolute;
+        width: 300px;
+        height: 100vh;
+        border-right: solid red
+    }
+    .overlay {
+        display: none;
+        position: absolute;
+        background-color: black;
+        opacity: .2;
+        width: 100%;
+        height: 100vh;
+    }
+    
+    body {
+        background-color: white;
+        margin: 0;
+        background-image: url("/images/2c-0.png");
+        background-size: 100% calc(200vh + 63px);
+        background-position: top;
+        background-repeat: repeat;
+        display:flex;
+        flex-wrap: wrap;
+    }
+    body.about {
+        background-image: url("/images/covenant-planet.jpg");
+        background-size: 135% calc(200vh + 63px);
+
+    }
+    
+    .header{
+        display:flex;
+        height: 63px;
+    }   
+    .head-toolbar{
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        background-color: #252323;
+        color: white;
+        padding: 0px 5px;
+        width: 100vw;
+        position: sticky;
+        top:0px;
+        z-index: 50;
+        transition: color 1s;
+        transition: background-color 1s;
+    }
+    .head-toolbar.active{
+        background-color: white;
+        color: #252323;
+        box-shadow: 1px 1px 10px 0px #252323;
+        width:100% !important;
+    }
+   
+    .head-toolbar.active > .head-toolbar-links > *{
+        color:#252323;
+    }
+
+    .head-toolbar > .head-toolbar-links{
+        display: flex;
+        /* justify: flex-end; */
+        justify-content: space-between;
+        padding:0px 10px;
+    }
+    .head-toolbar > .head-toolbar-links > a{
+        padding:20px 10px;
+        margin:0px 5px 0px 5px;
+        border:none;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        transition: color .5s;
+        transition: background-color .5s, text-decoration 0.5 ease-in-out;
+        /* transition: text-decoration 0.5s ease-in-out;	 */
+    }
+    .head-toolbar > .head-toolbar-links > *:hover{
+        background-color: white;
+        text-decoration: underline;
+        color:#252323;
+        box-shadow: 1px 0px 10px 0px #252323;
+        cursor: pointer;
+    }
+    .head-toolbar.active > .head-toolbar-links > *:hover{
+        background-color: #252323;
+        color:white;
+        cursor: pointer;
+
+    }
+    #home {
+        display:block;
+        position: relative;
+        visibility: hidden;
+    }
+
+    #projects {
+        display:block;
+        position: relative;
+        top:63px;
+        visibility: hidden;
+    }
+    /* button:focus{
+        outline: none !important;
+    } */
+    .index_view {
+        background-color: #252323;
+        position: absolute;
+        top:63px;
+        width: 100%;
+        height: calc(100vh - 63px);
+        z-index: 1;
+    }
+    
+    #circle-glass {
+        position: absolute;
+        display: block;
+        width:200px;
+        height: 200px;
+        opacity: 100%;
+        filter: invert(50%);
+        border-radius: 50%;
+        z-index: -1;
+        background-color: aqua;
+    }
+    .index_view.active > #circle-glass {
+        display:none;
+    }
+    .index-text{
+        position: absolute;
+        font-size: 50px;
+        z-index:15;
+        color:white;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+    }
+    .icon-cont-index-1{
+        position: absolute;
+        display: block;
+        top:50%;
+        left:30%;
+        transform: translate(-50%,-50%)
+    }
+    .icon-cont-index-2{
+        position: absolute;
+        display: block;
+        top:50%;
+        left:70%;
+        transform: translate(-50%,-50%)
+    }
+    .index_view.active > .icon-cont-index-1{
+        display: none;
+    }
+    #icon > * {display: none; position: absolute;top:-100%;left:calc(-50%);color:white; font-size: 40px;}
+    #icon:hover > * {display: flex;z-index: 10; cursor: pointer}
+    .icon-header{
+        position: absolute;
+        color:#252323;
+        top:-150%;
+        left:10%
+    }
+    .content_view {
+        position: fixed;
+        top:-63px;
+        background-image: none;
+        width:100%;
+        height:calc(100vh + 63px);
+        transition: all 1s;
+    }
+    .content-placeholder{
+        position: relative;
+        width:100%;
+        height:calc(100vh + 63px);
+        z-index:-1
+    }
+    .about-me-page {
+        position: relative;
+        width:100%;
+        height:calc(100vh + 63px);
+        transition: all 1s;
+        z-index: -1
+    }
+    
+    .about-me-view {
+        position: fixed;
+        top:-63px;
+        width:100%;
+        height: calc(100vh + 63px);
+        display: none;
+        background-image: url('../images/console-room.jpg');
+        background-size: 120% 100%;
+    }
+    .about-me-cont{
+        position:absolute;
+        width:50vw;
+        height:50vh;
+        top:60%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        background-color: #00ffff;
+        border:solid;
+        border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .about-me-left{
+        display: flex;
+        justify-content: ;
+        width:100%;
+        border:solid
+    }
+    .my-img{
+        margin:10px
+    }
+    .my-img > img {
+        border: solid;
+        border-radius: 10px
+    }
+    .about-me-text{
+        /* width:50%; */
+        flex-grow: 1;
+        /* border:solid ; */
+        height:;
+        
+    }
+    .skills{
+        width: 100%;
+        height: 20%;
+    }
+    .content_view > * {display: none;}
+
+    .content_view.active{background-image:  url('/images/map_template.png');}
+    .content_view.active > *{display: block;}
+    
+    .about-me-view.active {display: block}
+
+    .project-img-cont > img{
+        width:100%;
+    }
+    .front-end {
+        display: none;
+    }
+    .front-end.active{
+        display:block;
+    }
+    .back-end {
+        display: none;
+    }
+    .back-end.active {
+        display: block;
+    }
+    .title-text{
+        position: absolute;
+        background-color: #00ffff;
+        padding: 10px;
+        border-radius: 10px;
+        border:solid;
+
+        top: 15%;
+        left:50%;
+        transform: translate(-50% ,0); 
+        text-align: center;
+        z-index: 5;
+    }
+
+    .flash {
+        position: fixed;
+        width:100%;
+        height: 100%;
+        background-color: white;
+        opacity: 0;
+        z-index: -1;
+    }
+
+    .shader {
+        position: fixed;
+        width:100%;
+        height:120vh;
+        background-color: black;
+        opacity: 0;
+        z-index: -1;
+    }
+    .shader.show{
+        opacity: .5;;
+        z-index: 3;
+    }
+    
+    .image-hover-scorp:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+        
+    }
+
+    @keyframes flash {
+        from{ opacity: 1;z-index: 10;}
+        to{ opacity: 0; z-index: -1}
+    }
+
+    .fly {
+        animation: fly 2s infinite;
+    }
+    .fly:hover {
+        animation: flyhover 2s infinite;
+        cursor: pointer;
+    }
+    .image-hover:hover {
+        transform: scale(1.1);
+        z-index: 4;
+        cursor: pointer;
+    }
+    #hornet1.hover > h2 {
+        position: absolute;
+        display:block;
+        color:white;
+        z-index: 5;
+        top:-80px
+    }
+    #scorpion1.hover > h2 {
+        position: relative;
+        display:block;
+        color:white;
+        z-index: 5;
+    }
+    #cheif.hover > h2 {
+        display:block;
+        color:white
+    }
+    .image-hover:hover {
+        transform: scale(1.1);
+        z-index: 4;
+        cursor: pointer
+    }
+    #pelican-1 {width:"25%"}
+
+    @keyframes fly {
+        0% { transform: translate(0px, 0px) rotate(1deg); }
+        5% { transform: translate(0px, 0.2px) rotate(1deg); }
+        10% { transform: translate(0px, 0.4px) rotate(1deg); }
+        15% { transform: translate(0px, 0.8px) rotate(1deg); }
+        20% { transform: translate(0px, 1.2px) rotate(1deg); }
+        25% { transform: translate(0px, 2.0px) rotate(1deg); }
+        30% { transform: translate(0px, 2.4px) rotate(1deg); }
+        35% { transform: translate(0px, 2.6px) rotate(1deg); }
+        40% { transform: translate(0px, 2.8px) rotate(1deg); }
+        45% { transform: translate(0px, 2.8px) rotate(1deg); }
+        50% { transform: translate(0px, 2.8px) rotate(1deg); }
+        55% { transform: translate(0px, 2.6px) rotate(1deg); }
+        60% { transform: translate(0px, 2.4px) rotate(1deg); }
+        65% { transform: translate(0px, 2.0px) rotate(1deg); }
+        70% { transform: translate(0px, 1.2px) rotate(1deg); }
+        75% { transform: translate(0px, 0.8px) rotate(1deg); }
+        80% { transform: translate(0px, 0.4px) rotate(1deg); }
+        85% { transform: translate(0px, 0.2px) rotate(1deg); }
+        90% { transform: translate(0px, -0.2px) rotate(1deg); }
+        95% { transform: translate(0px, -0.2px) rotate(1deg); }
+        100% { transform: translate(0px, 0px) rotate(1deg); }
+    }
+    @keyframes flyhover {
+        0% { transform: translate(0px, 0px) rotate(1deg) scale(1.1); }
+        5% { transform: translate(0px, 0.2px) rotate(1deg) scale(1.1); }
+        10% { transform: translate(0px, 0.4px) rotate(1deg) scale(1.1); }
+        15% { transform: translate(0px, 0.8px) rotate(1deg) scale(1.1); }
+        20% { transform: translate(0px, 1.2px) rotate(1deg) scale(1.1); }
+        25% { transform: translate(0px, 2.0px) rotate(1deg) scale(1.1); }
+        30% { transform: translate(0px, 2.4px) rotate(1deg) scale(1.1); }
+        35% { transform: translate(0px, 2.6px) rotate(1deg) scale(1.1); }
+        40% { transform: translate(0px, 2.8px) rotate(1deg) scale(1.1); }
+        45% { transform: translate(0px, 2.8px) rotate(1deg) scale(1.1); }
+        50% { transform: translate(0px, 2.8px) rotate(1deg) scale(1.1); }
+        55% { transform: translate(0px, 2.6px) rotate(1deg) scale(1.1); }
+        60% { transform: translate(0px, 2.4px) rotate(1deg) scale(1.1); }
+        65% { transform: translate(0px, 2.0px) rotate(1deg) scale(1.1); }
+        70% { transform: translate(0px, 1.2px) rotate(1deg) scale(1.1); }
+        75% { transform: translate(0px, 0.8px) rotate(1deg) scale(1.1); }
+        80% { transform: translate(0px, 0.4px) rotate(1deg) scale(1.1); }
+        85% { transform: translate(0px, 0.2px) rotate(1deg) scale(1.1); }
+        90% { transform: translate(0px, -0.2px) rotate(1deg) scale(1.1); }
+        95% { transform: translate(0px, -0.2px) rotate(1deg) scale(1.1); }
+        100% { transform: translate(0px, 0px) rotate(1deg) scale(1.1); }
+    }
+    #animation-frame {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index:-1;
+    }
+    #animation-frame.load {
+        z-index:20;
+    }
+    #icon {margin:10px}
+    #icon:hover{transform: scale(1.1); cursor: pointer;}
+    .icon-cont{display: flex; justify-content: space-evenly; flex-wrap: wrap;}
+    .detail-cont{border-left:solid; min-width:40%}
+    .text-cont {position:relative; bottom:16px; max-height:50%; border-bottom: solid; padding:10px }
+    
+    #hornet1 > .back-end-title{display: none}
+    #hornet1.active > .back-end-main{display: flex; border-top: solid;}
+    
+    #hornet1.active > .back-end-title{display:block; width: 100%; text-align: center;}
+    #hornet1.active > .back-end-main{display: flex; border-top: solid;}
+    
+    #scorpion1 > .front-end-title{display: none}
+    #scorpion1.active > .front-end-main{display: flex; border-top: solid;}
+    
+    #scorpion1.active > .front-end-title{display:block; width: 100%; text-align: center;}
+    #scorpion1.active > .front-end-main{display: flex; border-top: solid;}
+    
+    #scorpion-img{position:relative; width:35vw;}
+    #hornet-img{position: relative; width:25vw; height:calc((522/800) *25vw);}
+    #cheif-img{position:relative; width:20vw}
+
+    #scorpion1 {position:absolute; transition: all 2s, background-color 0s, z-index 0s, transform 0s, width 0s; width:40vw; bottom:5vh; left:5vw}
+    #hornet1 {position:absolute; transition:all 2s, background-color 0s, z-index 0s, transform 0s; width:25vw; top:35%; left:40%}
+    #cheif {position:absolute; transition: all 2s, background-color 0s, z-index 0s, transform 0s; width:20vw; right:5%; bottom:5vh;}
+
+    #scorpion1 > div > .detail-cont {display:none;}
+    #hornet1 > div > .detail-cont {display:none;}
+    #cheif > div {display: none;}
+    
+
+    #scorpion1.active > div > .detail-cont{display:block;}
+    #hornet1.active > div > .detail-cont {display:block;}
+    #cheif.acitve > div {display: block;}
+
+    #scorpion1.leave {left:-40vw;}
+    #hornet1.leave {left:-40vw;}
+    #cheif.leave {right:-20vw;}
+
+    #scorpion1.active {display: flex; align-items:center; flex-wrap:wrap; justify-content: center; background-color: #00ffff; border:solid 8px; left:20vw; top:40vh; width:60vw; height: fit-content}
+    #hornet1.active {display: flex; align-items:center; flex-wrap: wrap; justify-content: center; background-color: #00ffff; border:solid 8px; left:25vw; top:40vh; min-width:50vw; height: fit-content}
+    #cheif.active {display: flex; background-color: #00ffff; border:solid 8px; left:30vw; top:40vh; width:40vw; height: fit-content}
+    
+    #scorpion1.hidden {display:none;}
+    #hornet1.hidden {display:none;}
+    #cheif.hidden {display:none;}
+
+    #scorpion-img.focus {z-index:10};
+    #hornet-img.focus {z-index:10};
+    #spartan-img.focus {z-index:10};
+
+}
+@media only screen and (max-width : 500px)  {
+    .test{
+        background-color: red;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+}
