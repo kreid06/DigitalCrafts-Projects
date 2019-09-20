@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <canvas>
+    </canvas>
+    <div class="start-menu-cont">
+      <div id="start-menu" class="start-menu" >
+        <h1 class="start-title">Planet Of The Shapes online!</h1>
+        <button id="login-button">Login</button>
+        <button id="register-button">Register</button>
+      </div>
+      <div id="login" class="login-cont hidden">
+        <h1 class="login-title">Login</h1>
+        <div id="login-msg">Please enter login info. </div>
+        <div class="username-cont">
+          <label for="username-field">username: </label>
+          <input id="username-field" class="text-field" placeholder="username">
+        </div>
+        <div class="password-cont">
+          <label for="password-field">password: </label>
+          <input id="password-field" class="text-field" placeholder="password">
+        </div>
+        <button id="login-submit">login</button>
+      </div>
+      <div id="Register" class="register-cont hidden">
+        <h1 class="register-title">Register</h1>
+        <div id="register-msg">Hello, Please register below :)</div>
+        <div class="username-cont">
+            <label for="username-field">username: </label>
+            <input id="username-field" class="text-field" placeholder="enter a username">
+          </div>
+          <div class="password-cont">
+            <label for="password-field">password: </label>
+            <input id="password-field" class="text-field" placeholder="enter a password">
+          </div>
+          <div class="password-check-cont">
+            <label for="password-check-field">password check: </label>
+            <input id="password-check-field" class="text-field" placeholder="reenter password">
+            <button class="register-submit">register</button>
+          </div>
+          <div id="menu-loading" class="menu-loading hidden">
+            <h1>Loading...</h1>
+          </div>
+        </div>
+      </div> 
+  </body>
+</html>

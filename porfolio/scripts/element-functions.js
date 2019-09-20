@@ -39,8 +39,10 @@ function elementFunctions(){
             function toolBar(){
                 if(pageScoll!= 0){
                     toolbar.classList.add('active');
+                    body.style.cursor = 'default'
                 } else {
                     toolbar.classList.remove('active');
+                    body.style.cursor = 'none'
                 }
             }
 

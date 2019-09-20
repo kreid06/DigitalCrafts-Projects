@@ -137,9 +137,12 @@
         border-radius: 50%;
         z-index: -1;
         background-color: aqua;
+        transition: all 3s,left 0s,top 0s;
     }
     .index_view.active > #circle-glass {
         display:none;
+        transition: all 3s,left 0s,top 0s;
+
     }
     .index-text{
         position: absolute;
