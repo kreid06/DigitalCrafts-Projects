@@ -144,30 +144,30 @@ function elementFunctions(){
     function hoverFunc() {
         window.addEventListener('mouseover', (e)=>{
             if(e.target == scorpionImg){
-                scorpionImg.setAttribute('src', '/images/scorpion-yellow-high.png');
+                scorpionImg.setAttribute('src', './images/scorpion-yellow-high.png');
                 scorpionImg.style.zIndex = '4';
                 scorpion.classList.contains('hover') && view === 0? null : view ===0? scorpion.classList.add('hover'):null;
             } else {
-                scorpionImg.setAttribute('src', '/images/scorpion-blue-high.png');
+                scorpionImg.setAttribute('src', './images/scorpion-blue-high.png');
                 scorpionImg.style.zIndex = '0';
                 scorpion.classList.contains('hover') ? scorpion.classList.remove('hover'):null;
 
             }
             if(e.target == hornetImg){
-                hornetImg.setAttribute('src', '/images/hornet-yellow-high.png');
+                hornetImg.setAttribute('src', './images/hornet-yellow-high.png');
                 hornetImg.style.zIndex = '4';
                 hornet.classList.contains('hover') ? null :view ===0?hornet.classList.add('hover'):null;
             } else {
-                hornetImg.setAttribute('src', '/images/hornet-blue2-high.png');
+                hornetImg.setAttribute('src', './images/hornet-blue2-high.png');
                 hornetImg.style.zIndex = '0';
                 hornet.classList.contains('hover') ? hornet.classList.remove('hover'):null;
             }
             if(e.target == cheifImg){
-                cheifImg.setAttribute('src', '/images/master-cheif3-yellow-high.png')
+                cheifImg.setAttribute('src', './images/master-cheif3-yellow-high.png')
                 cheifImg.style.zIndex = '4';
                 cheif.classList.contains('hover') ? null : view===0 ? cheif.classList.add('hover'):null;
             } else {
-                cheifImg.setAttribute('src', '/images/master-cheif3-blue-high.png')
+                cheifImg.setAttribute('src', './images/master-cheif3-blue-high.png')
                 cheifImg.style.zIndex = '0';
                 cheif.classList.contains('hover')? cheif.classList.remove('hover') : null;
             }

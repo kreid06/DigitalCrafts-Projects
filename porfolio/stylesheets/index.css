@@ -29,7 +29,7 @@
     body {
         background-color: white;
         margin: 0;
-        background-image: url("/images/2c-0.png");
+        background-image: url("./images/2c-0.png");
         background-size: 100% calc(200vh + 63px);
         background-position: top;
         background-repeat: repeat;
@@ -37,7 +37,7 @@
         flex-wrap: wrap;
     }
     body.about {
-        background-image: url("/images/covenant-planet.jpg");
+        background-image: url("./images/covenant-planet.jpg");
         background-size: 135% calc(200vh + 63px);
 
     }
@@ -248,7 +248,7 @@
     }
     .content_view > * {display: none;}
 
-    .content_view.active{background-image:  url('/images/map_template.png');}
+    .content_view.active{background-image:  url('./images/map_template.png');}
     .content_view.active > *{display: block;}
     
     .about-me-view.active {display: block}
