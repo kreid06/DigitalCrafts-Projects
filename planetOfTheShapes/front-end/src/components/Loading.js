@@ -6,11 +6,7 @@ import { connect } from 'react-redux';
 class Loading extends React.Component{
     
     render(){
-        if(this.props.playing===true){
-            return (
-                <Redirect to="/game"/>
-            )
-        }else{
+        while(this.props.playing===false){
             return(
                 <div className="menu-cont">
                     <div id="menu-loading" className="menu-loading hidden">
@@ -19,6 +15,9 @@ class Loading extends React.Component{
                 </div>
             )
         }
+            return (
+                <Redirect to="/game"/>
+            )
     }
 }
 

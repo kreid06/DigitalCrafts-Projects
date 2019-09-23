@@ -1,9 +1,11 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { getMap, sendPlayer, getPlayers } from '../connection/api';
-import { playerSquare, UserSquare } from '../game/shapes'
-import './Map.css'
+import { getMap, sendPlayer, getPlayers, setPlayerIP, createBullet, getBullets, checkHit, killPlayer } from '../connection/api';
+import { playerSquare, UserSquare, drawBullet } from '../game/shapes'
+import './Map.css';
+import killUser from '../actions/playerDead'
 
 class Map extends React.Component{
     constructor(){
@@ -12,15 +14,22 @@ class Map extends React.Component{
             players: [],
             mapSize: {width:5000, height:5000},
             player: null,
-            keys: null
+            keys: null,
+            playerIP: null,
+            bullets: []
         }
         getMap((err, mapData)=> this.setState({
             mapSize : mapData
         }))
-        getPlayers((err, playerList)=>{this.setState({
-            players: playerList
-        })
-    })
+        getPlayers((err, playerList)=>this.setState({
+            players : playerList
+        }))
+        setPlayerIP((err, playerIP)=>this.setState({
+            playerIP
+        }))
+        getBullets((err, bullets)=>this.setState({
+            bullets
+        }))
     }
     createPlayer(name, color){
             return new UserSquare(Math.floor(Math.random() * this.state.mapSize.width), Math.floor(Math.random()*this.state.mapSize.height), 100, name, color)
@@ -33,30 +42,42 @@ class Map extends React.Component{
         var player;
         var playerStatus = false;
         var keydown;
+        var timesFired = 0;
         var checkPlayer = ()=>{
             console.log('it worked')
             playerStatus = true
             if(this.props.playing === true){
-                    player = this.createPlayer(this.props.name, this.props.color)
-                    keydown = {w:false, a:false, s:false, d:false};
-                    
-                    document.addEventListener("keydown",(e)=>{
-                        // console.log(e)
-                            switch(e.keyCode){
-                                case 87:
-                                    keydown.w = true
-                                    keydown.s = false
-                                    break;
-                                case 83:
-                                    keydown.w = false
-                                    keydown.s = true
-                                    break;
-                                default:
-                                    keydown.w = false
-                                    keydown.s = false
-                                }
-                            })
-                        }
+                player = this.createPlayer(this.props.name, this.props.color)
+                keydown = {w:false, a:false, s:false, d:false};
+                console.log(this.props.name)
+                document.addEventListener("keydown",(e)=>{
+                    // console.log(e)
+                    switch(e.keyCode){
+                        case 87:
+                        keydown.w = true
+                        keydown.s = false
+                        break;
+                    case 83:
+                        keydown.w = false
+                        keydown.s = true
+                        break;
+                    default:
+                        keydown.w = false
+                        keydown.s = false
+                    }
+                })
+                document.addEventListener("keyup", (e)=>{
+                    keydown.s = false
+                    keydown.w = false
+                })
+                document.addEventListener("click", (e)=>{
+                    timesFired ++
+                    if(playerStatus){
+                        let {x,y,angle} = player
+                        createBullet(this.state.playerIP,timesFired, [x+50,y+50,angle])
+                    }
+                })
+            }
         }
         
             
@@ -64,12 +85,29 @@ class Map extends React.Component{
         console.log('hi')
         const canvas = this.refs.canvas
         const ctx = canvas.getContext("2d")
+        const canvasCont = this.refs.canvasCont
 
         var stop = false;
         var frameCount = 0;
         var fps, fpsInterval, startTime, now, then, elapsed;
         
         var playerAngle = 0;
+
+        checkHit((err, [playerIP, playerHealth])=>{
+            if(playerIP===this.state.playerIP){
+                player.health -= 20
+            }
+        })
+
+        killPlayer((err, [playerIP,playerHealth])=>{
+            if(playerIP===this.state.playerIP){
+                this.props.killUser()
+                player=undefined
+                playerStatus = false
+                this.props.history.push('/game/menu')
+            }
+        })
+
         function mousefunc() {
             if(window.Event) {
                 document.captureEvents(Event.MOUSEMOVE)
@@ -78,9 +116,9 @@ class Map extends React.Component{
         }
         var mouse = (e)=> {
             // console.log('hello world')
-            if(this.props.playing === true){
+            if(playerStatus === true){
                 var x = (window.Event) ? e.pageX : e.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
-                playerAngle = (Math.atan2(((e.clientX-100)-player.x+ document.documentElement.scrollLeft), -((e.clientY-100+document.documentElement.scrollTop)-player.y))+ 3*Math.PI/2)
+                playerAngle = (Math.atan2(((e.clientX-100)-player.x+50+ document.documentElement.scrollLeft), -((e.clientY-100+document.documentElement.scrollTop)-player.y))+ 3*Math.PI/2)
             }
             // console.log((e.clientX))
             // console.log(player.x)
@@ -107,20 +145,27 @@ class Map extends React.Component{
 
                 if(this.props.playing===true){
                     player.setAngle(playerAngle)
-                    var { angle, color } = player
+                    var { angle, color, size, health } = player
                     let [x,y]  = player.checkKeys(keydown)
+                    let userName = this.props.name
                     // console.log(angle)
                     // console.log(x)
     
     
-                    sendPlayer({ x, y, angle, color })
+                    sendPlayer({ x, y, angle, color, size, health, userName  })
     
                     ctx.clearRect(0, 0, canvas.width, canvas.height)
-                    playerSquare({ x, y, angle, color }, ctx);
+                    playerSquare({ x, y, angle, color, size, health, userName }, ctx);
                 }
 
                 this.state.players.forEach((player)=>{
-                    playerSquare(player, ctx)
+                    if(player.ip!==this.state.playerIP && player.health>=0){
+                        playerSquare(player, ctx)
+                    }
+                })
+                this.state.bullets.forEach((bullet)=>{
+                    // console.log(bullet)
+                    drawBullet(bullet,ctx)
                 })
             }
         }
@@ -135,8 +180,10 @@ class Map extends React.Component{
       }
     render(){
             return(
-                <canvas ref="canvas" id="mpMap" width={this.state.mapSize.width} height={this.state.mapSize.height}> 
-                </canvas>
+                <div ref="canvas-cont">
+                    <canvas ref="canvas" id="mpMap" width={this.state.mapSize.width} height={this.state.mapSize.height}> 
+                    </canvas>
+                </div>
             )
         }
 
@@ -145,10 +192,16 @@ class Map extends React.Component{
 function mapStateToProps(state){
     console.log(state)
     return {
-        playing: state.players.playing,
         name: state.players.name,
+        playing: state.players.playing,
         color: state.players.color
     }
 }
 
-export default connect(mapStateToProps)(Map)
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({
+        killUser
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map)

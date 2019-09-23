@@ -8,7 +8,7 @@ function getRndColor(){
 }
 
 function getGuestName(){
-    return `Guest${Math.random*Math.pow(10,16)}`
+    return `Guest ${Math.floor(Math.random()*Math.pow(10,6))}`
 }
 
 var seedState = 
@@ -24,8 +24,11 @@ export default (state = seedState, action)=>{
         let newState = Object.assign({},state);
         newState.color = action.payload.color
         newState.playing = action.payload.playing
-        newState.name = newState.name === "" ? state.name : newState.name
-        console.log(newState)
+        newState.name = newState.name === "" ? newState.name : action.payload.name
+        return newState
+    }else if(action.type === "playerDead"){
+        let newState = Object.assign({},state)
+        newState.playing = action.payload.playing
         return newState
     }
     return state

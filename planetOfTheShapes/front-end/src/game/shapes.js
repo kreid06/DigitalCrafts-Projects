@@ -14,7 +14,7 @@ class UserSquare {
         this.health = 100;
         this.power = 100;
         this.speed = 0
-        this.maxSpeed = 40;
+        this.maxSpeed = 30;
         this.angle= 0;
         this.x = x+this.size/2;
         this.y = y+this.size/2;
@@ -30,7 +30,7 @@ class UserSquare {
         }
         if(this.speed > 0){            
             this.speed -= s === true && this.speed > 0? 1 : 0
-            this.speed --
+            this.speed -= .5
         }else{
             this.speed = 0
         }
@@ -56,8 +56,12 @@ var playerSquare = (player, ctx)=>{
     var y_pos = player.y
     var r_pos = player.angle
     var color = player.color
+    var maxHealth = 100;
+    var health = player.health
+    var percent = health/maxHealth
+    var playerName = player.userName
     
-    var size = 100;
+    var size = player.size;
     var angle = r_pos;
     var x_center = x_pos + size/2
     var y_center = y_pos + size/2
@@ -68,11 +72,25 @@ var playerSquare = (player, ctx)=>{
     ctx.translate(-(x_center),-(y_center));
     ctx.fillRect(x_pos, y_pos, size, size);
     ctx.restore();
+    
+    ctx.save()
+    
+    
+    ctx.fillStyle = "red";
+    ctx.fillRect(x_pos, y_pos - 20, size * percent, 12);
+    
+    // ctx.fillStyle = "black";
+    // ctx.fillRect(x_pos, y_pos - 10, size, 20);
+    ctx.fillStyle = "Black";
+    ctx.font = "18px sans-serif";
+    ctx.fillText(percent * 100 +"%", x_pos, y_pos-20);
+    ctx.fillText(playerName, x_pos, y_center);
+    ctx.restore();
 }
 
-var bullet = (bullet, ctx)=>{
-    var x_pos = bullet.x
-    var y_pos = bullet.y;
+var drawBullet = ([x,y,angle], ctx)=>{
+    var x_pos = x
+    var y_pos = y;
     var size = 20;
     
     ctx.save();
@@ -80,4 +98,4 @@ var bullet = (bullet, ctx)=>{
     ctx.restore();
 }
 
-export { playerSquare, bullet, UserSquare }
+export { playerSquare, drawBullet, UserSquare }

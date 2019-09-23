@@ -7,7 +7,7 @@ import updatePlayer from '../actions/updatePlayer'
 class Play extends React.Component{
     
     state = {
-        name: this.props.name,
+        name: "",
         color: this.props.color
     }
 
@@ -31,15 +31,19 @@ class Play extends React.Component{
     render(){
             return (
                 <div className="menu-cont">
-                    <h1>Welcome to Pots online!</h1>
-                    <label htmlFor="color-input">username: </label>
-                    <input value={this.state.name} onChange={this.changeName} type="text" placeholder={this.props.name}/>
-                    <input value={this.state.color} onChange={this.changeColor} id="color-input" type="color"/>
-                    <button id="start-button" onClick={this.updatePlayerFunc}>play</button>
+                    <h1 className="title">Welcome to Pots online!</h1>
+                    <div className="row">
+                        <label htmlFor="username-input">Username: </label>
+                        <input className="username" value={this.state.name} onChange={this.changeName} id="username-input" type="text" placeholder={this.props.name}/>
+                    </div>
+                    <div className="row">
+                        <label htmlFor="color-input">Color: </label>
+                        <input className="color" value={this.state.color} onChange={this.changeColor} id="color-input" type="color"/>
+                    </div>
+                        <button className="start-button" id="start-button" onClick={this.updatePlayerFunc}>START!</button>
                 </div>
             )
         }
-    
 }
 
 function mapStateToProps(state){
